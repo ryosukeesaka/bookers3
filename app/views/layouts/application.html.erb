@@ -38,9 +38,6 @@
         <%= link_to "logout", destroy_user_session_path, method: :delete %>
       </span>
       </li>
-    
-     
-    
     <% else %>
       <li class="">
         <span class="glyphicon glyphicon-home" aria-hidden="true">
@@ -63,9 +60,13 @@
 </nav>
 </div>
 </header>
-    <%= yield %>
+<div class="container">
+  <div class="row">
+<%= yield %>
+  </div>
+</div>
 
-    <footer>
+<footer>
   <div class="container">
     <div class="row">
       <div class="col-xs-3 col-xs-offset-9">

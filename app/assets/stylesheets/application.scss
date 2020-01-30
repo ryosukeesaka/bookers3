@@ -101,7 +101,6 @@ td {
 }
 
 span {
-  color: white;
   font-size: 20px;
   padding-left: 0px;
 }
@@ -131,5 +130,8 @@ div {
     float: left;
 }
 
+.nav navbar-nav navbar-left {
+  color: white;
+}
 @import "bootstrap-sprockets";
 @import "bootstrap";

@@ -7,9 +7,23 @@
 <div class = "col-xs-3">
 <h2>User info</h2>
 
-    <%= @user.name %>
-      <%= @user.introduction %>
-    <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img" %>
+   
+    <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg',fallback: "no_image.jpg", class: "img-circle pull-left profile-img" %>
+     <table class="table">
+     <tbody>
+        <tr></tr> 
+      <tr>
+        <th>name</th>
+        <th><%= @user.name %></th>
+        <th></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th><%= @user.introduction %></th>
+        <th></th>
+      </tr>
+</tbody>
+</table>
     <% if @user == current_user.id %>
     <%= link_to "", edit_user_path(current_user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
     <% else %>
