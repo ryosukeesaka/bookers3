@@ -21,6 +21,16 @@
         <th><%= @user.introduction %></th>
         <th></th>
       </tr>
+       <tr>
+        <th>sex</th>
+        <th><%= @user.sex %></th>
+        <th></th>
+      </tr>
+       <tr>
+        <th>address</th>
+        <th><%= @user.address %></th>
+        <th></th>
+      </tr>
 </tbody>
 </table>
     <% if @user.id == current_user.id %>

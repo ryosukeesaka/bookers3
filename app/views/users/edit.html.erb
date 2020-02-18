@@ -18,6 +18,18 @@
         <label for="introduction">Introduction</label>
    <%= f.text_area :introduction %>
   </div>
+<div class="sex-field">
+    <%= f.label :Sex %><br />
+    <%= f.label :man  %>
+    <%= f.radio_button :sex, :man %>
+    <%= f.label :woman  %>
+    <%= f.radio_button :sex, :woman %>
+</div>
+
+  <div class="field">
+        <label for="address">address</label>
+   <%= f.text_area :address %>
+  </div>
 
 <div class="actions">
     <%= f.submit "Update User" %>

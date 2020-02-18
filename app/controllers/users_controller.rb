@@ -16,6 +16,8 @@ def new
     def index
     	 @users = User.all
     	 @book = Book.new
+         @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true)
     end
 
     def show
@@ -46,7 +48,7 @@ def new
 
     private
     def user_params
-      params.require(:user).permit(:name, :profile_image, :introduction)
+      params.require(:user).permit(:name, :profile_image, :introduction,:sex, :address)
     end
 
     def correct_user
