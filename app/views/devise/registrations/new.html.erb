@@ -5,10 +5,23 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
   
+
+
+<div class="field">
+  <%= f.label :prefecture  %><br>
+  <%= f.select :prefecture, User.prefectures.keys, {prompt: '選択してください'}, class: 'form-control  btn-default' ,style:"width:120px" %>
+</div>
+
+
   <div class="field">
 <div><%= f.label :name %><br />
              <%= f.text_field :name %></div>
            </div>
+
+<div class="field">
+  <%= f.label :age  %><br>
+  <%= f.select :age, User.ages.keys, {prompt: '選択してください'}, class: 'form-control  btn-default' ,style:"width:70px" %>
+</div>
 
   <div class="field">
     <%= f.label :email %><br />
@@ -28,17 +41,15 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
- <%= f.label :sex, :man %>
-  <%= f.radio_button :sex, :man %>
-  <%= f.label :sex, :woman %>
-  <%= f.radio_button :sex, :woman %>
-  <%= f.label :sex, :other %>
-  <%= f.radio_button :sex, :other %>
+ <%= f.label :gender, :man %>
+  <%= f.radio_button :gender, :man %>
+  <%= f.label :gender, :woman %>
+  <%= f.radio_button :gender, :woman %>
+  <%= f.label :gender, :other %>
+  <%= f.radio_button :gender, :other %>
 
-<div class="field">
-<div><%= f.label :address %><br />
-             <%= f.text_field :address %></div>
-           </div>
+
+
 
 
   <div class="actions">
@@ -48,3 +59,6 @@
 </div>
 
 <%= render "devise/shared/links" %>
+
+
+

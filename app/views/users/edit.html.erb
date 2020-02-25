@@ -18,20 +18,29 @@
         <label for="introduction">Introduction</label>
    <%= f.text_area :introduction %>
   </div>
-<div class="sex-field">
-    <%= f.label :Sex %><br />
+<div class="gender-field" style="display:inline-block";>
+    <%= f.label :gender %><br />
     <%= f.label :man  %>
-    <%= f.radio_button :sex, :man %>
+    <%= f.radio_button :gender, :man %>
     <%= f.label :woman  %>
-    <%= f.radio_button :sex, :woman %>
+    <%= f.radio_button :gender, :woman %>
+    <%= f.label :other  %>
+    <%= f.radio_button :gender, :other %>
 </div>
 
-  <div class="field">
-        <label for="address">address</label>
-   <%= f.text_area :address %>
-  </div>
 
-<div class="actions">
+<div class="field">
+  <%= f.label :prefecture  %><br>
+  <%= f.select :prefecture, User.prefectures.keys, {prompt: '選択してください'}, class: 'form-control  btn-default' ,style:"width:120px" %>
+</div>
+
+<div class="field">
+  <%= f.label :age  %><br>
+  <%= f.select :age, User.ages.keys, {prompt: '選択してください'}, class: 'form-control  btn-default' ,style:"width:120px" %>
+</div>
+
+
+<div class="actions" style="margin-top:20px";>
     <%= f.submit "Update User" %>
 
 <% if @user.errors.any? %>

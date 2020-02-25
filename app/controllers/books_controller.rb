@@ -3,8 +3,8 @@ class BooksController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def new
- @book = Book.new
- @books = Book.all
+    @book = Book.new
+    @books = Book.all
   end
 
   def create
@@ -13,13 +13,13 @@ class BooksController < ApplicationController
     @books = Book.all
     @book.user_id = current_user.id
     if @book.save
-    redirect_to book_path(@book.id), notice: "You have creatad book successfully."
-  else
+    redirect_to book_path(@book.id)
+    flash[:create] ="大成功2."
+    else
     render action: :index
-
-  end
- 
     end
+ 
+  end
 
     def edit
       @book = Book.find(params[:id])
@@ -28,21 +28,24 @@ class BooksController < ApplicationController
 
     def index
       @user = current_user
-    	 @books = Book.all
+    	@books = Book.page(params[:page])
     	@book = Book.new
+      @t = Book.ransack(params[:q])
+      @books = @t.result(distinct: true)
     end
 
     def show
       @new = Book.new
       @book = Book.find(params[:id])
       @user = @book.user
+      @post_comment = PostComment.new
     end
 
     def update
       @book = Book.find(params[:id])
-      @book.update(book_params)
-      if @book.save
-      redirect_to book_path(@book.id),notice:"You have update book successfully."
+     if @book.update(book_params)
+      redirect_to book_path(@book.id)
+      flash[:update] ="大成功."
       else
       render action: :edit
     end

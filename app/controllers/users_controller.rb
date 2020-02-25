@@ -48,7 +48,7 @@ def new
 
     private
     def user_params
-      params.require(:user).permit(:name, :profile_image, :introduction,:sex, :address)
+      params.require(:user).permit(:name, :profile_image, :introduction,:gender, :address, :prefecture, :age)
     end
 
     def correct_user

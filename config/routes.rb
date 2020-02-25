@@ -10,7 +10,11 @@ Rails.application.routes.draw do
   get "top" => "books#top"
 
   resources :users, only: [:show, :new, :create, :index, :destroy, :update, :edit]
-  resources :books, only: [:new, :create, :index, :edit, :show, :destroy, :update]
+  resources :books, only: [:new, :create, :index, :edit, :show, :destroy, :update] do
+  	resources :post_comments, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy]
+  end
   resources :home, only: [:top, :about]
+
 
 end

@@ -1,4 +1,5 @@
-<p><%= flash[:notice] %></p>
+<p><%= flash[:create] %></p>
+<p><%= flash[:update] %></p>
 
 <div class="container">
   <div class ="row">
@@ -7,11 +8,11 @@
 <div class = "col-xs-3">
 <h2>User info</h2>
 
-   
+
     <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg',fallback: "no_image.jpg", class: "img-circle pull-left profile-img" %>
-     <table class="table">
-     <tbody>
-        <tr></tr> 
+    <table class="table">
+      <tbody>
+        <tr></tr>
       <tr>
         <th>name</th>
         <th><%= @user.name %></th>
@@ -22,8 +23,8 @@
         <th><%= @user.introduction %></th>
         <th></th>
       </tr>
-</tbody>
-</table>
+      </tbody>
+  </table>
     <% if @user == current_user.id %>
     <%= link_to "", edit_user_path(current_user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
     <% else %>
@@ -66,8 +67,6 @@
     <%= @user.name %>
   <% end %>
 </td>
-
-    
  <td><%= link_to @book.title, book_path %></td>
  <td><%= @book.body %></td>
  <td><% if @user == current_user %>
@@ -76,6 +75,56 @@
     <% if @user == current_user %>
     <%= link_to "Destroy", book_path, method: :delete, "data-confirm" => "Are you sure?" %>
       <% end %>
+
+
+    <% if @book.favorited_by?(current_user) %>
+      <li style="list-style: none;">
+        <%= link_to book_favorites_path(@book.id), method: :delete do %>
+          <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+            <%= @book.favorites.count %> 
+        <% end %>
+      </li>
+    <% else %>
+      <li style="list-style: none;">
+        <%= link_to book_favorites_path(@book.id), method: :post do %>
+          <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+            <%= @book.favorites.count %>
+    <% end %>
+      </li>
+  <% end %>
+
+
+      <div class="comment-list bt style-2" id="comments"></div>
+          <h2 class="comment-count" style="font-size: 15px;">
+            <span class="glyphicon glyphicon-comment" aria-hidden="true" style="margin-right: 5px;"></span>
+            <%= @book.post_comments.count %></h2>
+          <ul style="list-style: none; margin-bottom: 10px;">
+            <% @book.post_comments.each do |post_comment| %>
+              <li class="comment" style="list-style: none;">
+                  <div class="comment-text" style="margin-bottom: 10px;">
+                    <div class="comment-author">
+                        <a href="#" class="link-author"><%= link_to post_comment.user.name %></a>
+                        <span class="comment-meta">
+                          <span class="comment-date"><%= post_comment.comment %></span>
+                        </span>
+                        <li style="list-style: none; float:right;">
+                          <% if post_comment.user_id == current_user.id %>
+                            <%= link_to "削除", book_post_comment_path(@book, post_comment), method: :delete %>
+                          <% end %>
+                        </li>
+                    </div>
+                    <div style="margin-bottom: 10px;" class="comment-entry"><%= post_comment.created_at.strftime('%Y/%m/%d') %></div>
+                  </div>
+              </li>
+            <% end %>
+          </ul>
+
+<%= form_for [@book, @post_comment] do |f| %>
+  <div class="row">
+    <div class="col-sm-12"><%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %></div>
+  </div>
+    <%= f.submit "送信する", class: "btn btn-default  pull-right",style:"font-size: 5px; margin-top: 5px;" %>
+<% end %>
 
 </td>
 </tr>

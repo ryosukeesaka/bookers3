@@ -2,7 +2,7 @@
 
 
 
-<div class="container">
+<div class="container" style="width:850px;">
   <div class="row">
 <div class = "col-xs-3">
 
@@ -22,13 +22,17 @@
         <th></th>
       </tr>
        <tr>
-        <th>sex</th>
-        <th><%= @user.sex %></th>
+        <th>gender</th>
+        <th><%= @user.gender %></th>
+        <th></th>
+      </tr>
+      <th>age</th>
+        <th><%= @user.age %></th>
         <th></th>
       </tr>
        <tr>
-        <th>address</th>
-        <th><%= @user.address %></th>
+        <th>prefecture</th>
+        <th><%= @user.prefecture %></th>
         <th></th>
       </tr>
 </tbody>
@@ -79,15 +83,20 @@
 </thead>
 
 <tbody>
-<% @user.books.each do |book| %>
+<% @user.books.each do |a| %>
 <tr>
   <td>
- <%= link_to user_path(book.user.id) do %>
- <%= attachment_image_tag book.user, :profile_image,format: 'jpeg', fallback: "no_image.jpg",size: "50x50"  %></td>
+ <%= link_to user_path(a.user.id) do %>
+ <%= attachment_image_tag a.user, :profile_image,format: 'jpeg', fallback: "no_image.jpg",size: "50x50"  %></td>
       <% end %>
-  <td><%= link_to book.title, book_path(book.id) %></td>
+  <td><%= link_to a.title, book_path(a.id) %></td>
 
-  <td><%= book.body %></td>
+  <td><%= a.body %> <ul class="inline-meta">
+      <li style="list-style: none; float:right;">
+        <span class="glyphicon glyphicon-comment" aria-hidden="true" style="color:#a9a9a9;"></span>
+        <%= link_to "#{a.post_comments.count}", book_path(a.id) %>
+      </li>
+    </ul></td>
 </tr>
   <% end %>
 </tbody>
