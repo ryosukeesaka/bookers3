@@ -1,12 +1,12 @@
 class FavoritesController < ApplicationController
     def create
-        book = Book.find(params[:book_id])
-        favorite = current_user.favorites.new(book_id: book.id)
+        b = Book.find(params[:book_id])#本を見つける
+        favorite = current_user.favorites.new(book_id: b.id)#favoriteテーブルのbook_idカラムにbook.idを入れる
         favorite.save
-        if params[:q]
+        if params[:q]#中身はl qは変数
         redirect_to books_path
         else
-        redirect_to book_path(book.id)
+        redirect_to book_path(b.id)
         end
     end
     def destroy

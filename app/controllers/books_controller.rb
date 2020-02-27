@@ -11,14 +11,13 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
     @user = current_user
     @books = Book.all
-    @book.user_id = current_user.id
+    @book.user_id = current_user.id#外部キー　book.user_idは空の状態
     if @book.save
     redirect_to book_path(@book.id)
     flash[:create] ="大成功2."
     else
     render action: :index
     end
- 
   end
 
     def edit

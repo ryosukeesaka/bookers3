@@ -14,16 +14,17 @@ def new
     end
 
     def index
-    	 @users = User.all
-    	 @book = Book.new
-         @q = User.ransack(params[:q])
-    @users = @q.result(distinct: true)
+    	@users = User.all
+    	@book = Book.new
+        @q = User.ransack(params[:q])
+        @users = @q.result(distinct: true)
     end
 
     def show
     	@user = User.find(params[:id])
     	@book = Book.new
     end
+        
 
     def edit
         @user = User.find(params[:id])
