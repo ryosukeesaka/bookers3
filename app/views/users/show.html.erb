@@ -31,17 +31,17 @@
       </tr>
       <tr>
         <th>follows</th>
-        <th><%= link_to "follows: #{@user.follower.count}", follows_path(@user.id) %></th>
+        <th><%= link_to " #{@user.follower.count}", follows_path(@user.id) %></th>
       </tr>
       <tr>
         <th>followers</th>
-        <th><%= link_to "followers: #{@user.followered.count}", followers_path(@user.id) %></th>
+        <th><%= link_to "#{@user.followered.count}", followers_path(@user.id) %></th>
       </tr>
       <tr>
         <th>
           <% unless @user == current_user %>
             <% if current_user.following?(@user) %>
-              <%= link_to 'フォロー外す', relationship_path(@user.id), method: :DELETE, class:"btn btn-warning" %>
+              <%= link_to 'フォロー解除', relationship_path(@user.id), method: :DELETE, class:"btn btn-warning" %>
             <% else %>
               <%= link_to 'フォローする', relationships_path(@user.id), method: :POST, class:"btn btn-warning" %>
             <% end %>
@@ -100,7 +100,7 @@
     <tr>
       <td>
         <%= link_to user_path(a.user.id) do %>
-          <%= attachment_image_tag a.user, :profile_image,format: 'jpeg', fallback: "no_image.jpg",size: "50x50"  %>
+          <%= attachment_image_tag a.user, :profile_image,format: 'jpeg', fallback: "no_image.jpg",size: "50x50" , class: "img-circle"  %>
         <% end %>
       </td>
       <td><%= link_to a.title, book_path(a.id) %></td>

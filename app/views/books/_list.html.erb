@@ -1,1 +1,15 @@
-<h1>aaaaaaaa</h1>
+  <% if book.favorited_by?(current_user) %>
+    <li style="list-style: none; float: right;">
+      <%= link_to book_favorites_path(book.id, q: "l"), method: :delete do %>
+        <span class="glyphicon glyphicon-heart" aria-hidden="true" style="color: red;"></span>
+          <%= book.favorites.count %>
+      <% end %>
+    </li>
+  <% else %>
+    <li style="list-style: none; float: right;">
+      <%= link_to book_favorites_path(book.id,q: "l"), method: :post do %>
+        <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+          <%= book.favorites.count %>
+    <% end %>
+    </li>
+  <% end %>

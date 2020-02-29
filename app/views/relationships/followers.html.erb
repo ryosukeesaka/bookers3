@@ -20,7 +20,7 @@
                 <td>
                     <% unless user == current_user %>
                         <% if current_user.following?(user) %>
-                            <%= link_to 'フォロー外す', relationship_path(user.id), method: :DELETE, class:"btn btn-warning" %>
+                            <%= link_to 'フォロー解除', relationship_path(user.id), method: :DELETE, class:"btn btn-warning" %>
                         <% else %>
                             <%= link_to 'フォローする', relationships_path(user.id), method: :POST, class:"btn btn-warning" %>
                         <% end %>
