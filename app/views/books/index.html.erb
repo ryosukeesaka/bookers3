@@ -2,54 +2,7 @@
 
 
 
-  <% if @book.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= I18n.t("errors.messages.not_saved",count: @book.errors.count,resource: @book.class.model_name.human.downcase)%></h2>
-        <ul><% @book.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-    </div>
-  <% end %>
-
-
-<div class="container">
-  <div class = "row">
-    <div class = "col-xs-3">
-      <h2>User info</h2>
-        <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg',fallback: "no_image.jpg", class: "img-circle pull-left profile-img" %>
-        <table class="table">
-          <tbody>
-            <tr></tr>
-            <tr>
-              <th>name</th>
-              <th><%= @user.name %></th>
-              <th></th>
-            </tr>
-            <tr>
-              <th>introduction</th>
-              <th><%= @user.introduction %></th>
-              <th></th>
-            </tr>
-          </tbody>
-        </table>
-      <% if current_user.id == current_user.id %>
-        <%= link_to "", edit_user_path(current_user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench" %>
-      <% end %><br>
-
-
-
-
-
-      <h1>Newbook</h1>
-        <%= form_for(@book) do |f| %>
-      <h4>Title</h4>
-        <%= f.text_field :title %>
-      <h4>Opinion</h4>
-        <%= f.text_area :body %><br>
-        <%= f.submit 'Create Book' %>
-        <% end %>
-    </div>
+<%= render 'users/prof', book: @book, user: @user %>
 
 
 
